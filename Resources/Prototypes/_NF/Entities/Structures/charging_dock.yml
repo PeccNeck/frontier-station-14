@@ -1,0 +1,66 @@
+- type: entity
+  id: BaseChargingDock
+  noSpawn: true
+  name: shuttle charging dock
+  description: Allan please add details
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Docking
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      docking:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+          position: "0,-0.5"
+        hard: false
+  - type: Transform
+    anchored: true
+  - type: Sprite # TODO: add unique sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Power/substation.rsi
+    layers:
+    - state: substation_wall
+    - state: screen
+      shader: unshaded
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      input:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+  - type: Airtight
+    fixVacuum: true
+    noAirWhenFullyAirBlocked: false
+  - type: Tag
+    tags:
+      - ForceNoFixRotations
+  - type: WallMount
+
+- type: entity
+  parent: BaseChargingDock
+  id: ChargingDockBasic
