@@ -1,7 +1,7 @@
 - type: entity
   id: BaseChargingDock
-  noSpawn: true
-  name: shuttle charging dock
+  abstract: true
+  name: external powerdock
   description: Allan please add details
   placement:
     mode: SnapgridCenter
@@ -9,6 +9,9 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Docking
+    radarColor: chocolate
+    highlightedRadarColor: peru
+    dockType: Power
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -53,12 +56,6 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Effects/metalbreak.ogg
-  - type: Airtight
-    fixVacuum: true
-    noAirWhenFullyAirBlocked: false
-  - type: Tag
-    tags:
-      - ForceNoFixRotations
   - type: WallMount
 
 - type: entity
